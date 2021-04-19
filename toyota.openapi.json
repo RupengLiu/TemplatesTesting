@@ -1,0 +1,199 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "toyota-accessories-api",
+        "description": "Manage aftermarket accessories for Toyota cars and trucks.",
+        "contact": {
+            "email": "vlvinogr@microsoft.com"
+        },
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://toyota-accessories-service.azurewebsites.net/api"
+        }
+    ],
+    "paths": {
+        "/accessories": {
+            "post": {
+                "summary": "accessories",
+                "description": "accessories",
+                "operationId": "post-accessories",
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/accessory-req"
+                            },
+                            "example": {
+                                "type": "Exterior",
+                                "name": "Alloy wheel locks",
+                                "id": "1001"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": []
+            },
+            "get": {
+                "summary": "accessories",
+                "description": "accessories",
+                "operationId": "get-accessories",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/accessory-list"
+                                },
+                                "example": [
+                                    {
+                                        "type": "Exterior",
+                                        "name": "Alloy wheel locks",
+                                        "id": "1001"
+                                    },
+                                    {
+                                        "type": "Exterior",
+                                        "name": "Ball mount",
+                                        "id": "1002"
+                                    },
+                                    {
+                                        "type": "Exterior",
+                                        "name": "Blackout emplem overlays",
+                                        "id": "1003"
+                                    },
+                                    {
+                                        "type": "Interior",
+                                        "name": "Frameless HomeLink mirror",
+                                        "id": "1004"
+                                    },
+                                    {
+                                        "type": "Interior",
+                                        "name": "All-weather floor liners",
+                                        "id": "1005"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "tags": []
+            }
+        },
+        "/accessories/{id}": {
+            "get": {
+                "summary": "accessory",
+                "description": "accessory",
+                "operationId": "get-accessory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "null",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/accessory-res"
+                                },
+                                "example": {
+                                    "type": "Exterior",
+                                    "name": "Alloy Wheel Locks",
+                                    "id": "1001"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": []
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "accessory-list": {
+                "type": "array",
+                "items": {
+                    "required": [
+                        "type",
+                        "name",
+                        "id"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "id": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "accessory-res": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "accessory-req": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "Ocp-Apim-Subscription-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "subscription-key",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ],
+    "tags": []
+}
